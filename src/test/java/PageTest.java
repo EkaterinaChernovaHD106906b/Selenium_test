@@ -1,13 +1,12 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+
 
 public class PageTest {
     private WebDriver driver;
@@ -24,7 +23,6 @@ public class PageTest {
         options.addArguments("--no-sandbox");
         // options.addArguments("--headless");
         driver = new ChromeDriver(options);
-        // driver.get("http://u920152e.beget.tech/# ");
     }
 
     /* @AfterEach
@@ -34,10 +32,16 @@ public class PageTest {
      }*/
     @Test
     public void loginWithEmailAndPassword() {
+        driver.get("http://u920152e.beget.tech/# ");
         driver.findElement(By.cssSelector("[type='email'][name=auth_email]")).sendKeys("1679myemail@mail.ru");
         driver.findElement(By.cssSelector("[type='password'][name='auth_pass']")).sendKeys("67JhjjY");
         WebElement button = driver.findElement(By.cssSelector("[type='submit'][name='form_auth_submit']"));
         button.click();
+        WebElement p = driver.findElement(By.xpath("//p[contains(text(),'Сколько')]"));
+        String text = p.getText();
+        Assertions.assertEquals("Сколько Вам лет?", text);
+
+
     }
 
     @Test
