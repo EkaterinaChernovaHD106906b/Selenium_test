@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.io.File;
+
 
 public class PageTest {
     private WebDriver driver;
@@ -44,11 +46,13 @@ public class PageTest {
     }
 
     @Test
-    public void UploadFile() {
+    public void UploadFile() throws Exception {
         driver.get("https://the-internet.herokuapp.com/upload");
+        UploadFile.Uploader();
         By fileInput = By.xpath("//*[@id='file-upload'] [@name='file']");
-        String filePath = "C:\\Project\\Test\\src\\test\\java\\File_2.txt";
-        driver.findElement(fileInput).sendKeys(filePath);
+        //String filePath = "src/test/java/File.txt";
+        File file = new File("src/test/java/File.txt");
+        driver.findElement(fileInput).sendKeys(file.getAbsolutePath());
 
     }
 
