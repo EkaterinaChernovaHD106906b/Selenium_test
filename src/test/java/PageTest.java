@@ -1,6 +1,10 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -40,21 +44,46 @@ public class PageTest {
         button.click();
         WebElement p = driver.findElement(By.xpath("//p[contains(text(),'Сколько')]"));
         String text = p.getText();
+
         Assertions.assertEquals("Сколько Вам лет?", text);
 
 
     }
 
     @Test
-    public void UploadFile() throws Exception {
+    public void uploadFile() throws Exception {
         driver.get("https://the-internet.herokuapp.com/upload");
-        UploadFile.Uploader();
+        UploadFile.uploader();
         By fileInput = By.xpath("//*[@id='file-upload'] [@name='file']");
         //String filePath = "src/test/java/File.txt";
         File file = new File("src/test/java/File.txt");
         driver.findElement(fileInput).sendKeys(file.getAbsolutePath());
 
+
+    }
+
+    @Test
+    public void addRemoveElements() {
+        driver.get("https://the-internet.herokuapp.com/add_remove_elements/");
+        WebElement buttonAdd = driver.findElement(By.cssSelector("button[onclick='addElement()']"));
+        buttonAdd.click();
+        WebElement buttonDelete = driver.findElement(By.cssSelector("button[onclick='deleteElement()']"));
+        if (buttonDelete.isDisplayed()) {
+            buttonDelete.click();
+        } else {
+            System.out.println("Element not found");
+        }
+
+    }
+    @Test
+    public void checkMetods(){
+        UploadFile.deleteFile();
+        System.out.println(UploadFile.checkIfFileExist());
     }
 
 
 }
+
+
+
+
