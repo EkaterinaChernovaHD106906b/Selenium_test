@@ -53,7 +53,7 @@ public class PageTest {
     @Test
     public void uploadFile() throws Exception {
         driver.get("https://the-internet.herokuapp.com/upload");
-        UploadFile.uploader();
+        UploadFile.uploader("src/test/java/File.txt");
         By fileInput = By.xpath("//*[@id='file-upload'] [@name='file']");
         //String filePath = "src/test/java/File.txt";
         File file = new File("src/test/java/File.txt");
@@ -75,10 +75,13 @@ public class PageTest {
         }
 
     }
+
+
     @Test
-    public void checkMethods(){
+    public void checkMethods() throws Exception {
         UploadFile.deleteFile();
-        System.out.println(UploadFile.checkIfFileExist());
+        UploadFile.uploader("src/test/java/File.txt");
+        System.out.println(UploadFile.checkIfFileExist("src/test/java/File.txt"));
     }
 
 

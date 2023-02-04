@@ -9,18 +9,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class UploadFile {
-    private WebDriver driver;
 
-    public static void uploader() throws Exception {
-        String path = "src/test/java/File.txt";
-        FileWriter fileWriter = new FileWriter(path);
+
+    public static void uploader(String filePath) throws Exception {
+        // String path = "src/test/java/File.txt";
+        FileWriter fileWriter = new FileWriter(filePath);
         fileWriter.write("fileUploader");
         fileWriter.close();
 
     }
 
-    public static boolean checkIfFileExist() {
-        String filePath = "src/test/java/File.txt";
+    public static boolean checkIfFileExist(String filePath) {
+        // String filePath = "src/test/java/File.txt";
         Path path = Paths.get(filePath);
         boolean exists = Files.exists(path);
         if (exists) {
