@@ -76,7 +76,7 @@ public class PageTest {
 
     }
     @Test
-    public void checkMetods(){
+    public void checkMethods(){
         UploadFile.deleteFile();
         System.out.println(UploadFile.checkIfFileExist());
     }
