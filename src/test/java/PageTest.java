@@ -3,12 +3,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
 
@@ -74,6 +72,28 @@ public class PageTest {
             System.out.println("Element not found");
         }
 
+    }
+    @Test
+    public void basicAuth(){
+        driver.get("https://the-internet.herokuapp.com/basic_auth");
+        driver.switchTo().alert().sendKeys("admin" + Keys.TAB + "admin");
+
+        // driver.findElement(By.xpath("//body[contains(text(),'Not authorized')]")).isDisplayed();
+    }
+    @Test
+    public void checkboxes(){
+        driver.get("https://the-internet.herokuapp.com/checkboxes");
+        driver.findElement(By.xpath("//form/input[1]")).click();
+        driver.findElement((By.xpath("//form/input[2]"))).click();
+    }
+    @Test
+    public void contextMenu(){
+        driver.get("https://the-internet.herokuapp.com/context_menu");
+        WebElement contextMenu =  driver.findElement(By.cssSelector("#hot-spot"));
+        Actions actions = new Actions(driver);
+        actions.contextClick(contextMenu).perform();
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
     }
 
 
