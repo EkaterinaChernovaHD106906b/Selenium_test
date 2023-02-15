@@ -35,10 +35,11 @@ public class LoggingJul {
     }
 
     public static void checkLog() {
-        int a = 10;
         log.info("Initialization of first variable");
-        int b = 2;
+        int a = 10;
         log.info("Initialization of second variable");
+        int b = 2;
+
     }
     public static void fileDoesntExist(){
         try{
