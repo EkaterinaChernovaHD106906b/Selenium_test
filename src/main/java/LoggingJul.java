@@ -1,6 +1,8 @@
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Properties;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +14,11 @@ public class LoggingJul {
     public static void init() {
         FileHandler fh;
         try {
-            fh = new FileHandler("C:/Logger/MyLogFile.log");
+            FileInputStream fis;
+            Properties property = new Properties();
+            fis = new FileInputStream("src/main/java/LoggingJava.properties");
+            property.load(fis);
+            fh = new FileHandler(property.getProperty("java.util.logging.FileHandler.pattern"));
             log.addHandler(fh);
             SimpleFormatter formatter = new SimpleFormatter();
             fh.setFormatter(formatter);
@@ -23,8 +29,6 @@ public class LoggingJul {
     }
 
     public static void main(String[] args) {
-        init();
-        fileDoesntExist();
         try {
             int a = 10 / 0;
         } catch (Exception e) {
@@ -41,11 +45,12 @@ public class LoggingJul {
         int b = 2;
 
     }
-    public static void fileDoesntExist(){
-        try{
+
+    public static void fileDoesntExist() {
+        try {
             Files.readAllBytes(Paths.get("/file/does/not/exist"));
-        } catch (IOException ioex){
-            log.log(Level.SEVERE, "File doesn't exist",ioex);
+        } catch (IOException ioex) {
+            log.log(Level.SEVERE, "File doesn't exist", ioex);
         }
     }
 }
