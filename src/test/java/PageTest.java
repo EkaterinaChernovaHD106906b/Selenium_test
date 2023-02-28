@@ -35,16 +35,10 @@ public class PageTest {
      }*/
     @Test
     public void loginWithEmailAndPassword() {
-        driver.get("http://u920152e.beget.tech/# ");
-        driver.findElement(By.cssSelector("[type='email'][name=auth_email]")).sendKeys("1679myemail@mail.ru");
-        driver.findElement(By.cssSelector("[type='password'][name='auth_pass']")).sendKeys("67JhjjY");
-        WebElement button = driver.findElement(By.cssSelector("[type='submit'][name='form_auth_submit']"));
-        button.click();
-        WebElement p = driver.findElement(By.xpath("//p[contains(text(),'Сколько')]"));
-        String text = p.getText();
-
-        Assertions.assertEquals("Сколько Вам лет?", text);
-
+        new LoginPageBeget(driver)
+                .authorization("1679myemail@mail.ru", "67JhjjY");
+        new SurveyPage(driver)
+                .aseertText();
 
     }
 
@@ -73,23 +67,26 @@ public class PageTest {
         }
 
     }
+
     @Test
-    public void basicAuth(){
+    public void basicAuth() {
         driver.get("https://the-internet.herokuapp.com/basic_auth");
         driver.switchTo().alert().sendKeys("admin" + Keys.TAB + "admin");
 
         // driver.findElement(By.xpath("//body[contains(text(),'Not authorized')]")).isDisplayed();
     }
+
     @Test
-    public void checkboxes(){
+    public void checkboxes() {
         driver.get("https://the-internet.herokuapp.com/checkboxes");
         driver.findElement(By.xpath("//form/input[1]")).click();
         driver.findElement((By.xpath("//form/input[2]"))).click();
     }
+
     @Test
-    public void contextMenu(){
+    public void contextMenu() {
         driver.get("https://the-internet.herokuapp.com/context_menu");
-        WebElement contextMenu =  driver.findElement(By.cssSelector("#hot-spot"));
+        WebElement contextMenu = driver.findElement(By.cssSelector("#hot-spot"));
         Actions actions = new Actions(driver);
         actions.contextClick(contextMenu).perform();
         Alert alert = driver.switchTo().alert();
@@ -103,6 +100,7 @@ public class PageTest {
         UploadFile.uploader("src/test/java/File.txt");
         System.out.println(UploadFile.checkIfFileExist("src/test/java/File.txt"));
     }
+
 
 
 }

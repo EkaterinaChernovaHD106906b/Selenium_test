@@ -16,7 +16,7 @@ public class LoggingJul {
         try {
             FileInputStream fis;
             Properties property = new Properties();
-            fis = new FileInputStream("src/main/java/LoggingJava.properties");
+            fis = new FileInputStream("src/main/resources/LoggingJava.properties");
             property.load(fis);
             fh = new FileHandler(property.getProperty("java.util.logging.FileHandler.pattern"));
             log.addHandler(fh);
